@@ -6,7 +6,6 @@ import { Provider } from "react-redux";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
-import { CategoriesProvider } from "./contexts/categories.context";
 import { CartProvider } from "./contexts/cart.context";
 
 import { store } from "./store/store";
@@ -16,11 +15,9 @@ import "./index.scss";
 ReactDOM.render(
   <BrowserRouter>
     <Provider store={store}>
-      <CategoriesProvider>
-        <CartProvider>
-          <App />
-        </CartProvider>
-      </CategoriesProvider>
+      <CartProvider>
+        <App />
+      </CartProvider>
     </Provider>
   </BrowserRouter>,
   document.getElementById("root")
