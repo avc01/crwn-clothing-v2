@@ -6,8 +6,6 @@ import { Provider } from "react-redux";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
-import { CartProvider } from "./contexts/cart.context";
-
 import { store } from "./store/store";
 
 import "./index.scss";
@@ -15,9 +13,7 @@ import "./index.scss";
 ReactDOM.render(
   <BrowserRouter>
     <Provider store={store}>
-      <CartProvider>
-        <App />
-      </CartProvider>
+      <App />
     </Provider>
   </BrowserRouter>,
   document.getElementById("root")
