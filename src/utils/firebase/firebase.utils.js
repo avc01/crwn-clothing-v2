@@ -85,6 +85,7 @@ export const createAuthUserWithEmailAndPassword = async (email, password) => {
   return await createUserWithEmailAndPassword(auth, email, password);
 };
 
+// Currently not being used.
 export const onAuthStateChangedListener = (callback) =>
   onAuthStateChanged(auth, callback);
 
@@ -107,4 +108,17 @@ export const getCategoriesAndDocuments = async () => {
   const q = query(collectionRef);
   const querySnapshot = await getDocs(q);
   return querySnapshot.docs.map((docSnapshot) => docSnapshot.data());
+};
+
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = onAuthStateChanged(
+      auth,
+      (userAuth) => {
+        unsubscribe();
+        resolve(userAuth);
+      },
+      reject
+    );
+  });
 };
