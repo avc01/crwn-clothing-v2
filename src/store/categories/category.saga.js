@@ -9,7 +9,7 @@ import {
 } from "./category.action";
 
 // Saga Generators
-export function* fetchCategoriesAsync() {
+function* fetchCategoriesAsync() {
   try {
     const categoriesArray = yield call(getCategoriesAndDocuments);
     yield put(fetchCategoriesSuccess(categoriesArray));
@@ -18,7 +18,7 @@ export function* fetchCategoriesAsync() {
   }
 }
 
-export function* onFetchCategories() {
+function* onFetchCategories() {
   yield takeLatest(
     CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_START,
     fetchCategoriesAsync

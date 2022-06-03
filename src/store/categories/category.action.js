@@ -2,7 +2,7 @@ import { CATEGORIES_ACTION_TYPES } from "./category.types";
 import { createAction } from "../../utils/reducer/reducer.utils";
 import { getCategoriesAndDocuments } from "../../utils/firebase/firebase.utils";
 
-// Redux - Thunk and Saga
+// Redux - Thunk and Saga Executor
 export const fetchCategoriesStart = () =>
   createAction(CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_START);
 
