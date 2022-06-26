@@ -3,6 +3,7 @@ import {
   createAction,
   Action,
   ActionWithPayload,
+  withMatcher,
 } from "../../utils/reducer/reducer.utils";
 
 // Types
@@ -19,25 +20,24 @@ type fetchCategoriesFailed = ActionWithPayload<
   Error
 >;
 
-export type CategoryAction =
-  | FetchCategoriesStart
-  | FetchCategoriesSuccess
-  | fetchCategoriesFailed;
-
 // Redux - Thunk and Saga Executor
-export const fetchCategoriesStart = (): FetchCategoriesStart =>
-  createAction(CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_START);
+export const fetchCategoriesStart = withMatcher(
+  (): FetchCategoriesStart =>
+    createAction(CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_START)
+);
 
-export const fetchCategoriesSuccess = (
-  categoriesArray: Category[]
-): FetchCategoriesSuccess =>
-  createAction(
-    CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_SUCCESS,
-    categoriesArray
-  );
+export const fetchCategoriesSuccess = withMatcher(
+  (categoriesArray: Category[]): FetchCategoriesSuccess =>
+    createAction(
+      CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_SUCCESS,
+      categoriesArray
+    )
+);
 
-export const fetchCategoriesFailed = (error: Error): fetchCategoriesFailed =>
-  createAction(CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_FAILED, error);
+export const fetchCategoriesFailed = withMatcher(
+  (error: Error): fetchCategoriesFailed =>
+    createAction(CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_FAILED, error)
+);
 
 // Redux - Thunk (Currently not being used)
 /* export const fetchCategoriesAsync = async (dispatch) => {
