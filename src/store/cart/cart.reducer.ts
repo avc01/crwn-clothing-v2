@@ -6,8 +6,8 @@ import { setIsCartOpen, setCartItems } from "./cart.action";
 
 // Types
 export type CartState = {
-  isCartOpen: boolean;
-  cartItems: CartItem[];
+  readonly isCartOpen: boolean;
+  readonly cartItems: CartItem[];
 };
 
 // Reducer Initial State

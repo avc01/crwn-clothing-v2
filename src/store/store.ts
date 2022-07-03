@@ -1,7 +1,7 @@
 // Imports
-import { compose, applyMiddleware, createStore } from "redux";
+import { compose, applyMiddleware, createStore, Middleware } from "redux";
 import logger from "redux-logger";
-import { persistStore, persistReducer } from "redux-persist";
+import { persistStore, persistReducer, PersistConfig } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 //import thunk from "redux-thunk";
 import createSagaMiddleware from "@redux-saga/core";
@@ -9,11 +9,24 @@ import createSagaMiddleware from "@redux-saga/core";
 import { rootReducer } from "./root-reducer";
 import { rootSaga } from "./root-saga";
 
+// Types
+export type RootState = ReturnType<typeof rootReducer>;
+
+declare global {
+  interface Window {
+    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+  }
+}
+
+type ExtendedPersistConfig = PersistConfig<RootState> & {
+  whitelist: (keyof RootState)[];
+};
+
 // Redux - Persist Config
-const persistConfig = {
+const persistConfig: ExtendedPersistConfig = {
   key: "root",
   storage,
-  blacklist: ["user", "categories"],
+  whitelist: ["cart"],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -25,7 +38,7 @@ const sagaMiddleware = createSagaMiddleware();
 const middleWares = [
   process.env.NODE_ENV !== "production" && logger,
   sagaMiddleware,
-].filter(Boolean);
+].filter((middleware): middleware is Middleware => Boolean(middleware));
 
 // Middleware creation for Chrome Extension Redux Extension Tools
 const composeEnhancer =
