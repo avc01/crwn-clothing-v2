@@ -53,25 +53,25 @@ const clearCartItem = (
   cartItems.filter((cartItem) => cartItem.id !== cartItemToClear.id);
 
 // Types
-type setIsCartOpen = ActionWithPayload<
+type SetIsCartOpen = ActionWithPayload<
   CART_ACTION_TYPES.SET_IS_CART_OPEN,
   boolean
 >;
 
-type setCartItems = ActionWithPayload<
+type SetCartItems = ActionWithPayload<
   CART_ACTION_TYPES.SET_CART_ITEMS,
   CartItem[]
 >;
 
 // Actions
 export const setIsCartOpen = withMatcher(
-  (bool: boolean): setIsCartOpen =>
+  (bool: boolean): SetIsCartOpen =>
     createAction(CART_ACTION_TYPES.SET_IS_CART_OPEN, bool)
 );
 
 // Generic return for 3 methods below!!!
 export const setCartItems = withMatcher(
-  (cartItems: CartItem[]): setCartItems =>
+  (cartItems: CartItem[]): SetCartItems =>
     createAction(CART_ACTION_TYPES.SET_CART_ITEMS, cartItems)
 );
 

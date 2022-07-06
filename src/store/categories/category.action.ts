@@ -15,7 +15,7 @@ type FetchCategoriesSuccess = ActionWithPayload<
   Category[]
 >;
 
-type fetchCategoriesFailed = ActionWithPayload<
+type FetchCategoriesFailed = ActionWithPayload<
   CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_FAILED,
   Error
 >;
@@ -35,7 +35,7 @@ export const fetchCategoriesSuccess = withMatcher(
 );
 
 export const fetchCategoriesFailed = withMatcher(
-  (error: Error): fetchCategoriesFailed =>
+  (error: Error): FetchCategoriesFailed =>
     createAction(CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_FAILED, error)
 );
 
