@@ -1,9 +1,12 @@
+import { FC } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
 
 import { addItemToCart } from "../../store/cart/cart.action";
 import { selectCartItems } from "../../store/cart/cart.selector";
+
+import { CategoryItem } from "../../store/categories/category.types";
 
 import {
   Price,
@@ -12,7 +15,11 @@ import {
   ProductCardContainer,
 } from "./product-card.styles";
 
-const ProductCard = ({ product }) => {
+type ProductCardProps = {
+  product: CategoryItem;
+};
+
+const ProductCard: FC<ProductCardProps> = ({ product }) => {
   const { name, price, imageUrl } = product;
 
   // Hooks
