@@ -11,10 +11,11 @@ import { PersistGate } from "redux-persist/integration/react";
 import { store, persistor } from "./store/store";
 import { stripePromise } from "./utils/stripe/stripe.utils";
 
-import "./index.scss";
+import { GlobalStyle } from "./global.styles";
 
 ReactDOM.render(
   <BrowserRouter>
+    <GlobalStyle />
     <Provider store={store}>
       <PersistGate persistor={persistor}>
         <Elements stripe={stripePromise}>
